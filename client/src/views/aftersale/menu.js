@@ -1,0 +1,66 @@
+export default {
+  index: 4,
+  path: '/new/aftersale/',
+  name: '订单列表',
+  icon: 'el-icon-menu',
+  rule: '',
+  key: '4',
+  children: [
+    {
+      index: 1,
+      path: '/new/aftersale/list/total',
+      name: '全部',
+      icon: '',
+      rule: 'totalOrderListAuth',
+      key: '4-1',
+    },
+    {
+      index: 2,
+      path: '/new/aftersale/list/unappoint',
+      name: '待预约',
+      icon: '',
+      rule: 'unappointOrderListAuth',
+      key: '4-2',
+    },
+    {
+      index: 3,
+      path: '/new/aftersale/list/untested',
+      name: '待检测',
+      icon: '',
+      rule: 'untestedOrderListAuth',
+      key: '4-3',
+    },
+    {
+      index: 4,
+      path: '/new/aftersale/list/untransfered',
+      name: '待过户',
+      icon: '',
+      rule: 'untransferedOrderListAuth',
+      key: '4-4',
+    },
+    {
+      index: 5,
+      path: '/new/aftersale/list/transfered',
+      name: '已过户',
+      icon: '',
+      rule: 'transferedOrderListAuth',
+      key: '4-5',
+    },
+    {
+      index: 6,
+      path: '/new/aftersale/list/applyrefund',
+      name: '待退订',
+      icon: '',
+      rule: 'applyrefundOrderListAuth',
+      key: '4-6',
+    },
+    {
+      index: 7,
+      path: '/new/aftersale/list/refuned',
+      name: '已退订',
+      icon: '',
+      rule: 'refunedOrderListAuth',
+      key: '4-7',
+    }
+  ]
+}

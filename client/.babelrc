@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["vayne", {
+      "enableVueJsx": true
+    }]
+  ],
+  "plugins": [
+    ["component", [
+     {
+      "libraryName": "element-ui",
+      "styleLibraryName": "~theme"
+     }
+    ]]
+  ]
+}

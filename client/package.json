@@ -1,0 +1,52 @@
+{
+  "name": "aftersale-integration-fe",
+  "version": "1.0.2",
+  "private": true,
+  "description": "A Node + Vue.js project for cancel order ande refund system",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env ANNE_APP_CLIENT=development NODE_ENV=development yarn serve",
+    "serve": "anne serve --open",
+    "build": "cross-env ANNE_APP_CLIENT=production anne build",
+    "build:test": "cross-env ANNE_APP_CLIENT=sandbox anne build",
+    "prejenkins:build": "yarn add git+ssh://git@gitlab.renrenche.com:baoliwei/naruto.git#v0.1.2",
+    "jenkins:build": "naruto build -e online  -p yarn  -b build",
+    "predeploy:sandbox": "yarn add git+ssh://git@gitlab.renrenche.com:baoliwei/naruto.git#v0.1.2",
+    "deploy:sandbox": "naruto build -e test -p yarn  -b build:test && naruto deploy -e test",
+    "lint": "eslint --ext .js,.vue src",
+    "stylelint:fix": "stylelint --fix scss/**/*.scss src/**/*.scss scss/**/*.vue",
+    "et:i": "et -i scss/element.variables.scss",
+    "et:build": "et -c scss/element.variables.scss"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.renrenche.com/aftersale/aftersale-integration-fe"
+  },
+  "author": "baoliwei <baoliwei@renrenche.com>",
+  "contributors": [
+    "谢仁洪 <xierenhong@renrenche.com>"
+  ],
+  "devDependencies": {
+    "@anejs/anne-cli": "^2.2.0-beta.3",
+    "@anejs/anne-migration-vue": "^2.2.0-beta.3",
+    "element-theme-chalk": "^2.0.7"
+  },
+  "dependencies": {
+    "@rrc/utils": "^0.0.4",
+    "axios": "^0.17.1",
+    "cross-env": "^5.2.0",
+    "element-ui": "^2.0.7",
+    "express": "^4.17.1",
+    "js-cookie": "^2.2.0",
+    "moment": "^2.20.1",
+    "naruto": "git+ssh://git@gitlab.renrenche.com:baoliwei/naruto.git#v0.1.2",
+    "nprogress": "^0.2.0",
+    "qiniu-js": "^2.5.4",
+    "raven": "^2.6.0",
+    "raven-js": "^3.24.2",
+    "socket.io-client": "^2.2.0",
+    "vue-router": "^3.0.1",
+    "vue2-editor": "^2.6.6",
+    "vuex": "^3.0.1"
+  }
+}

@@ -1,0 +1,53 @@
+/* stylelint-disable */
+@font-face {
+  font-family: 'rrc-refund-font';  /* project id 1088414 */
+  src: url('//at.alicdn.com/t/font_1088414_026mqugwy7lq.eot');
+  src: url('//at.alicdn.com/t/font_1088414_026mqugwy7lq.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1088414_026mqugwy7lq.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1088414_026mqugwy7lq.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1088414_026mqugwy7lq.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1088414_026mqugwy7lq.svg#iconfont') format('svg');
+}
+
+%rrc-icon {
+  font-family: 'rrc-refund-font' !important;
+  font-size: 16px;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* stylelint-enable */
+
+[class^="rc-icon-"],
+[class*=" rc-icon-"] {
+  @extend %rrc-icon;
+}
+
+.rc-icon {
+  @extend %rrc-icon;
+
+  /* 通知 */
+  &-msg::before { content: "\e61a"; }
+
+  /* 工具栏 */
+  &-tool::before { content: "\e60f"; }
+
+  /* 退出 */
+  &-exit::before { content: "\e621"; }
+
+  /* 账号 */
+  &-account::before { content: "\e60e"; }
+
+  /* 座机电话 */
+  &-telephone::before { content: "\e668"; }
+
+  /* 电话听筒 */
+  &-phone::before { content: "\e686"; }
+  /* 客服 */
+  &-service::before { content: "\e635"; }
+}

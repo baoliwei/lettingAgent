@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "stylelint-config-vayne"
+  ],
+  "rules": {
+    "no-descending-specificity": null
+  }
+}
