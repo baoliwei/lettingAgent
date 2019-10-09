@@ -52,7 +52,7 @@ export default {
     ]),
     async init () {
       await this.getUserInfo()
-      this.isLogin && this.router.push('/')
+      this.isLogin && this.$router.push('/')
     },
     async login () {
       if (this.isForLogin) {

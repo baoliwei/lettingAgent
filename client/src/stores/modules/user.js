@@ -21,8 +21,9 @@ const actions = {
   async getUserInfo ({ commit }) {
     let result = null
     result = await currentUser()
+    console.log(result)
     commit('setIsLogin', true)
-    commit('setUserInfo', result.data)
+    commit('setUserInfo', result.result)
   }
 }
 

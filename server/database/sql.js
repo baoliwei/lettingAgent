@@ -2,7 +2,7 @@
 // SQL语句封裝
 var user = {
     insert:'INSERT INTO user(username, password) VALUES(?,?)',
-    update:'UPDATE user SET name=?, sex=?, age=?, IDCard=?, username=?, type=? WHERE id=?',
+    update:'UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?',
     delete: 'DELETE FROM user WHERE id=?',
     queryById: 'SELECT * FROM user WHERE id=?',
     queryAll: 'SELECT * FROM user',

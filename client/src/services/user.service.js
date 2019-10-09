@@ -22,5 +22,17 @@ export default [
     url: '/users/currentUser',
     method: 'get',
     description: '获取当前用户',
-  }
+  },
+  {
+    name: 'modifyUserInfo',
+    url: '/users/modifyInfo',
+    method: 'post',
+    description: '修改资料',
+  },
+  {
+    name: 'deleteUserInfo',
+    url: '/users/deleteUserInfo',
+    method: 'post',
+    description: '删除资料',
+  },
 ]

@@ -150,12 +150,13 @@ export function upload (url, params = {}, config = {}) {
  * @param {any} config 配置
  * @returns 返回新的参数
  */
-function getParams (params, config) {
+function getParams (params) {
+  return params
   // 用户相关
-  if (!config.isRemoveField) {
-    return params
-  }
-  return removeEmptyField(params, config.removeField)
+  // if (!config.isRemoveField) {
+  //   return params
+  // }
+  // return removeEmptyField(params, config.removeField)
 }
 
 /**

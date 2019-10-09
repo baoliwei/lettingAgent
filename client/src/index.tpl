@@ -10,7 +10,6 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="//busi.rrcimg.com/rrc/watermark/watermark.min.js"></script>
-    <script src="//common-web.shanyishanmei.com/modules/common/baseConfig.js"></script>
   </head>
   <body>
     <div id="app" rrc >

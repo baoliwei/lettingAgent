@@ -4,7 +4,8 @@ var json = function(res, result, msg) {
     if (typeof result === 'undefined') {
         res.json({
             status: 1,
-            msg: '操作失败'
+            result: result,
+            msg: msg || '操作失败'
         });
     } else {
         res.json({

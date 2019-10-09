@@ -23,7 +23,7 @@ router.post('/login', function(req, res, next) {
       auth.gen_session(result[0], res); // 生成cokkie
       json(res, result[0], '登录成功')
     } else {
-      json(res, result, '用户名或密码错误')
+      json(res, result[0], '用户名或密码错误')
     }
   })
 });
@@ -46,7 +46,16 @@ router.post('/register', function(req, res, next) {
   })
 });
 
-
+// 修改信息
+router.post('/modifyInfo', function(req, res, next) {
+  let params = req.body || {};
+  console.log(params.id)
+  // UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?
+  let sqlQuery = [params.name, params.sex, params.age, params.IDCard, params.type, params.id]
+  mysqlPoll.queryArgs(res, sql.update, sqlQuery, function(result) {
+    json(res, result, '信息修改成功')
+  })
+});
 
 // 查找权限内的所有用户
 router.get('/findAll', auth.userRequired, function(req, res, next) {

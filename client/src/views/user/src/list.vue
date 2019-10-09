@@ -6,13 +6,10 @@
       :data="formData"
       :attr="{ inline: true }"
       confirm-button-text="查询"
-      @confirm="onSearch" >
+      @confirm="onSearch('table')" >
       <!-- <template slot="footer">
         <div class="rc-partners-shop__operations">
-          <el-button @click="onReset">重置</el-button>
-          <rc-rule ruleCode="p_shop_create">
-            <el-button plain type="primary" @click="toAddShop">添加门店</el-button>
-          </rc-rule>
+          <el-button @click="onReset('form')">重置</el-button>
         </div>
       </template> -->
     </rc-form>
@@ -30,7 +27,7 @@
 import { FORM_DATA, COLUMNS } from './constant'
 import TableMixin from '@/mixins/table.mixin'
 import service from '@/services'
-const { getList } = service
+const { getList, deleteUserInfo } = service
 export default {
   mixins: [TableMixin],
   data () {
@@ -57,6 +54,20 @@ export default {
       console.log(result)
       // table.total = total
       table.list = result.result
+    },
+    modifyInfo (res) {
+      this.$router.push(`/user/detail/${res.id}`)
+    },
+    async deleteInfo (res) {
+      const params = {
+        id: res.id
+      }
+      await deleteUserInfo(params)
+      this.$notify.info({
+        title: '提示',
+        message: '删除成功'
+      })
+      this.onSearch('table')
     }
   }
 }

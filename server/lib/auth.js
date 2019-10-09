@@ -51,8 +51,10 @@ const auth = {
                 status: 401,
                 msg: '未登录'
             })
+            return
+        } else {
+            next();
         }
-        next();
     }
 }
 

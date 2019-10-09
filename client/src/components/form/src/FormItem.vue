@@ -80,7 +80,7 @@ export default {
       const attr = this.parseComponentAttr(prop)
       return (
         <rc-select
-          data={this.asyncData}
+          rcData={this.asyncData}
           onInput={this.sync}
           value={this.value}
           {...attr}>

@@ -28,9 +28,14 @@ export default {
       this.tableSelections = selections
     },
     // 搜索
-    onSearch () {
+    onSearch (id) {
       this.$nextTick(() => {
-        this.$refs.table.onSearch()
+        this.$refs[id].onSearch()
+      })
+    },
+    onReset (id) {
+      this.$nextTick(() => {
+        this.$refs[id].resetFields()
       })
     }
   }
