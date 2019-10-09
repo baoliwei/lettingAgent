@@ -8,6 +8,16 @@ function removeEmptyArrayEle(arr){
      }
      return arr;
 }
+
+function objToArr(params) {
+    let arr = [];
+    Object.keys(params).forEach((key)=>{
+        arr.push(params[key])
+    })
+    return arr
+}
+
 module.exports = {
-    removeEmptyArrayEle
+    removeEmptyArrayEle,
+    objToArr
 }
