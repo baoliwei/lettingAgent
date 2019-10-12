@@ -27,7 +27,7 @@
 import { FORM_DATA, COLUMNS } from './constant'
 import TableMixin from '@/mixins/table.mixin'
 import service from '@/services'
-const { getList, deleteUserInfo } = service
+const { getList, resetPassword, deleteUserInfo } = service
 export default {
   mixins: [TableMixin],
   data () {
@@ -58,12 +58,22 @@ export default {
     modifyInfo (res) {
       this.$router.push(`/user/detail/${res.id}`)
     },
+    async resetPassword (res) { // 重置密码
+      const params = {
+        id: res.id
+      }
+      await resetPassword(params)
+      this.$notify.success({
+        title: '提示',
+        message: '密码重置成功'
+      })
+    },
     async deleteInfo (res) {
       const params = {
         id: res.id
       }
       await deleteUserInfo(params)
-      this.$notify.info({
+      this.$notify.success({
         title: '提示',
         message: '删除成功'
       })

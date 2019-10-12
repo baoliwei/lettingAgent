@@ -87,6 +87,7 @@ export const COLUMNS = function () {
         return (
           <div>
             <el-button type="text" class="primary" onClick={_this.modifyInfo.bind(_this, scope.row)}>修改资料</el-button>
+            <el-button type="text" class="primary" onClick={_this.resetPassword.bind(_this, scope.row)}>重置密码</el-button>
             <el-button type="text" class="primary" onClick={_this.deleteInfo.bind(_this, scope.row)}>删除资料</el-button>
           </div>
         )

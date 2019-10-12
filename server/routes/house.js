@@ -23,7 +23,9 @@ router.post('/modifyInfo', function(req, res, next) {
   let params = req.body || {};
   console.log(params.id)
   // UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?
-  let sqlQuery = [params.name, params.sex, params.age, params.IDCard, params.type, params.id]
+  let sqlQuery = [params.name, params.addr, params.style, params.area,
+    params.propertyRight, params.propertyOwer, params.type, params.isSun, params.isNew,
+    params.ContactInformation, params.isLease, params.isSale, params.id]
   mysqlPoll.queryArgs(res, sql.update, sqlQuery, function(result) {
     json(res, result, '信息修改成功')
   })
@@ -31,10 +33,9 @@ router.post('/modifyInfo', function(req, res, next) {
 
 // 查找权限内的所有用户
 router.get('/findAll', auth.userRequired, function(req, res, next) {
-  let params = req.params || {};
+  let params = req.query || {};
   let sqlStr = ''; 
   let sqlQuery = [];
-  
   if(req.session.user.type !== 'admin') {
     sqlStr = sql.queryByArgs(req.session.user.id)
     sqlQuery = [req.session.user.id]
@@ -45,6 +46,7 @@ router.get('/findAll', auth.userRequired, function(req, res, next) {
     sqlQuery = [params.id, params.name, params.style, params.propertyRight, 
       params.propertyOwer, params.type, params.isSun, params.isNew, params.ContactInformation, params.isLease, params.isSale]
     sqlQuery = util.removeEmptyArrayEle(sqlQuery)
+    console.log('aaaaaaaaaaaaaaaaaaaa', sqlQuery)
   }
   mysqlPoll.queryArgs(res, sqlStr, sqlQuery, function(result) {
     if(result && result.length !== 0) {
@@ -52,6 +54,17 @@ router.get('/findAll', auth.userRequired, function(req, res, next) {
     } else {
       json(res, result, '暂无数据')
     }
+  })
+});
+
+// 删除信息
+router.post('/deleteHouseInfo', auth.userRequired, function(req, res, next) {
+  let params = req.body || {};
+  console.log(params.id)
+  // UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?
+  let sqlQuery = [params.id]
+  mysqlPoll.queryArgs(res, sql.delete, sqlQuery, function(result) {
+    json(res, result, '信息删除成功')
   })
 });
 

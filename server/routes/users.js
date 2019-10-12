@@ -46,8 +46,19 @@ router.post('/register', function(req, res, next) {
   })
 });
 
+// 删除信息
+router.post('/deleteUserInfo', auth.userRequired, function(req, res, next) {
+  let params = req.body || {};
+  console.log(params.id)
+  // UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?
+  let sqlQuery = [params.id]
+  mysqlPoll.queryArgs(res, sql.delete, sqlQuery, function(result) {
+    json(res, result, '信息删除成功')
+  })
+});
+
 // 修改信息
-router.post('/modifyInfo', function(req, res, next) {
+router.post('/modifyInfo', auth.userRequired, function(req, res, next) {
   let params = req.body || {};
   console.log(params.id)
   // UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?
@@ -57,9 +68,19 @@ router.post('/modifyInfo', function(req, res, next) {
   })
 });
 
+// 重置密码
+router.post('/resetPassword', auth.userRequired, function(req, res, next) {
+  let params = req.body || {};
+  console.log(params.id)
+  let sqlQuery = ['123456', params.id]
+  mysqlPoll.queryArgs(res, sql.resetPassword, sqlQuery, function(result) {
+    json(res, result, '密码重置成功')
+  })
+});
+
 // 查找权限内的所有用户
 router.get('/findAll', auth.userRequired, function(req, res, next) {
-  let params = req.params || {};
+  let params = req.query || {};
   let sqlStr = ''; 
   let sqlQuery = [];
   

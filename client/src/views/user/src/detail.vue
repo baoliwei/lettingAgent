@@ -20,7 +20,7 @@
 import { DETLAIL_FORM_DATA } from './constant'
 import TableMixin from '@/mixins/table.mixin'
 import service from '@/services'
-const { modifyUserInfo } = service
+const { getList, modifyUserInfo } = service
 export default {
   mixins: [TableMixin],
   data () {
@@ -37,14 +37,28 @@ export default {
       }
     }
   },
+  created() {
+    this.getInfoById()
+  },
   activated () {
     this.onReload()
   },
   methods: {
+    async getInfoById() {
+      const params = {
+        id: this.form.id
+      }
+      const result = await getList(params)
+      this.form = result.result[0]
+    },
     async modifyInfo () {
       const params = this.form
-      const result = await modifyUserInfo(params)
-      console.log(result)
+      await modifyUserInfo(params)
+      this.$notify.success({
+        title: '提示',
+        message: '修改成功'
+      })
+      this.$router.push(`/user/list`)
       // table.total = total
       // table.list = result.result
     }

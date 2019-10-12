@@ -30,6 +30,12 @@ export default [
     description: '修改资料',
   },
   {
+    name: 'resetPassword',
+    url: '/users/resetPassword',
+    method: 'post',
+    description: '重置密码',
+  },
+  {
     name: 'deleteUserInfo',
     url: '/users/deleteUserInfo',
     method: 'post',

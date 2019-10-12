@@ -111,7 +111,7 @@ export const COLUMNS = function () {
   return [
     {
       prop: 'name',
-      label: '姓名',
+      label: '房屋名称',
       'min-width': 120,
       align: 'center',
       'show-overflow-tooltip': true
