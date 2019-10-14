@@ -8,6 +8,7 @@ var auth = require('./lib/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var houseRouter = require('./routes/house');
+var leaseRouter = require('./routes/lease').router;
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/house', houseRouter);
+app.use('/lease', leaseRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

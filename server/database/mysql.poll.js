@@ -30,6 +30,8 @@ function query(res, sql, callback) {
                 msg: '数据库连接失败',
                 err: err
             });
+            connection.release();
+            return;
         }
         connection.query(sql, function(err, rows) {
             if(err) {
@@ -38,6 +40,8 @@ function query(res, sql, callback) {
                     msg: 'sql执行错误',
                     err: err
                 });
+                connection.release();
+                return;
             }
             callback(rows);
             //释放链接
@@ -58,20 +62,24 @@ function queryArgs(res, sql, args, callback) {
                 msg: '数据库连接失败',
                 err: err
             });
+            connection.release();
             return;
         }
         connection.query(sql, args, function(err, rows) {
             if(err) {
+                console.log(err)
                 res.json({
                     status: '201',
                     msg: 'sql执行错误',
                     err: err
                 });
+                connection.release();
                 return;
             }
-            callback(rows);
+
             //释放链接
             connection.release();
+            callback(rows);
         });
     });
 }

@@ -7,11 +7,11 @@
       :attr="{ inline: true }"
       confirm-button-text="查询"
       @confirm="onSearch('table')" >
-      <template slot="footer">
+      <!-- <template slot="footer">
         <div class="rc-partners-shop__operations">
           <el-button @click="publishHouse">发布房源</el-button>
         </div>
-      </template>
+      </template> -->
     </rc-form>
     <rc-table
       ref="table"
@@ -27,24 +27,21 @@
 import { FORM_DATA, COLUMNS } from './constant'
 import TableMixin from '@/mixins/table.mixin'
 import service from '@/services'
-const { findAllHouse, deleteHouseInfo } = service
+const { findAllLeaseHouse, deleteHouseInfo } = service
 export default {
   mixins: [TableMixin],
   data () {
     return {
       formData: FORM_DATA,
       COLUMNS: COLUMNS.call(this),
+      // id, name, style, isSun, type, isNew, propertyRight
       form: {
         name: '',
         style: '',
-        propertyRight: '',
-        propertyOwer: '',
-        type: '',
         isSun: '',
+        type: '',
         isNew: '',
-        contactInformation: '',
-        isLease: '',
-        isSale: ''
+        propertyRight: ''
       }
     }
   },
@@ -54,7 +51,7 @@ export default {
   methods: {
     async load (table) {
       const params = this.form
-      const result = await findAllHouse(params)
+      const result = await findAllLeaseHouse(params)
       console.log(result)
       // table.total = total
       table.list = result.result

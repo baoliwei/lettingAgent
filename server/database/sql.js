@@ -26,16 +26,24 @@ var user = {
 var house = {
     // 发布房源
     insert:`INSERT INTO house(name, addr, style, area, propertyRight, 
-        propertyOwer, type, isSun, isNew, ContactInformation, isLease, isSale) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`,
-    update:`UPDATE house SET 
+        propertyOwer, type, isSun, isNew, contactInformation, isLease, isSale) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)`,
+    // 修改房源
+    update() {
+        let sql = '';
+        sql = `
+        UPDATE house SET 
             name=?, addr=?, style=?, area=?, propertyRight=?, 
-            propertyOwer=?, type=?, isSun=?, isNew=?, ContactInformation=?, isLease=?, isSale=? WHERE id=?`,
+            propertyOwer=?, type=?, isSun=?, isNew=?, contactInformation=?, isLease=?, isSale=? WHERE id=?;
+            `
+        return sql
+    },
+    // 删除房源
     delete: 'DELETE FROM house WHERE id=?',
-    queryById: 'SELECT * FROM house WHERE id=?',
+    // 查找房源
     queryAll: 'SELECT * FROM house',
     //id 房屋名称 户型 是否朝阳 房屋类型 是否新房 是否出租 是否出售 产权 产权人 联系方式
     queryByArgs: (id, name, style, propertyRight, 
-        propertyOwer, type, isSun, isNew, ContactInformation, isLease, isSale) => {
+        propertyOwer, type, isSun, isNew, contactInformation, isLease, isSale) => {
         let sql = `SELECT * FROM house 
                ${ [].every.call(arguments, (item) => { return !!item }) ? 'where ' : '' }
                ${ id ? 'id=? and ' : '' }
@@ -46,7 +54,7 @@ var house = {
                ${ type ? 'type=? and ' : ''  }
                ${ isSun ? 'isSun=? and ' : ''  }
                ${ isNew ? 'isNew=? and ' : ''  }
-               ${ ContactInformation ? 'ContactInformation=? and ' : ''  }
+               ${ contactInformation ? 'contactInformation=? and ' : ''  }
                ${ isLease ? 'isLease=? and ' : ''  }
                ${ isSale ? 'isSale=? and ' : ''  }
                1=1`;
@@ -60,32 +68,47 @@ var house = {
 // SELECT * FROM 
 // ( lease LEFT JOIN house ON lease.houseId = house.id )
 // 	LEFT JOIN user ON lease.agentId = user.id
-// 房子
+// 出租管理
 var lease = {
-    // 发布房源
+    // 添加出租房源
     insert:`INSERT INTO lease(houseId) VALUES(?)`,
+    // 修改出租房源
     update:`UPDATE lease SET money=?, startTime=?, endTime=?, desc=? WHERE id=?`,
+    // 申领出租房源
     receive:`UPDATE lease SET agentId=?`,
-    delete: 'DELETE FROM lease WHERE id=?',
-    queryById: 'SELECT * FROM house WHERE id=?',
-    queryAll: 'SELECT * FROM house, lease',
-    //id 房屋名称 户型 是否朝阳 房屋类型 是否新房 是否出租 是否出售 产权 产权人 联系方式
-    queryByArgs: (id, name, style, propertyRight, 
-        propertyOwer, type, isSun, isNew, ContactInformation, isLease, isSale) => {
-        let sql = `SELECT * FROM lease, house, user
+    // 删除出租房源
+    delete: 'DELETE FROM lease WHERE houseId=?',
+    // 查找出租房源
+    selectByHouseId: 'SELECT * FROM lease where houseId=?',
+    //查找条件：id 房屋名称 户型 是否朝阳 房屋类型 是否新房  产权
+    queryByArgs: (id, name, style, isSun, type, isNew, propertyRight) => {
+        // SELECT * FROM 
+        // ( lease LEFT JOIN house ON lease.houseId = house.id )
+        // 	LEFT JOIN user ON lease.agentId = user.id
+        let sql = `SELECT
+                house.id as houseId,
+                house.name as name,
+                house.type,
+                house.propertyRight,
+                house.style,
+                house.isNew,
+                house.isSun,
+                house.type,
+                lease.money,
+                lease.startTime,
+                lease.endTime,
+                lease.desc,
+                user.contactInformation,
+                user.name as saleName
+                FROM ( lease LEFT JOIN house ON lease.houseId = house.id )
+                LEFT JOIN user ON lease.agentId = user.id
                ${ [].every.call(arguments, (item) => { return !!item }) ? 'where ' : '' }
-               lease.houseId = house.id
-               ${ id ? 'id=? and ' : '' }
-               ${ name ? 'name=?  and ' : ''  }
-               ${ style ? 'style=?  and ' : ''  }
-               ${ propertyRight ? 'propertyRight=? and ' : ''  }
-               ${ propertyOwer ? 'propertyOwer=? and ' : ''  }
-               ${ type ? 'type=? and ' : ''  }
-               ${ isSun ? 'isSun=? and ' : ''  }
-               ${ isNew ? 'isNew=? and ' : ''  }
-               ${ ContactInformation ? 'ContactInformation=? and ' : ''  }
-               ${ isLease ? 'isLease=? and ' : ''  }
-               ${ isSale ? 'isSale=? and ' : ''  }
+               ${ name ? 'house.name=?  and ' : ''  }
+               ${ style ? 'house.style=?  and ' : ''  }
+               ${ propertyRight ? 'house.propertyRight=? and ' : ''  }
+               ${ type ? 'house.type=? and ' : ''  }
+               ${ isSun ? 'house.isSun=? and ' : ''  }
+               ${ isNew ? 'house.isNew=? and ' : ''  }
                1=1`;
                console.log('-----------------------------------------')
                console.log('sql', sql)

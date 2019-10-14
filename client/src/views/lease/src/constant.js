@@ -1,14 +1,4 @@
-// 列表查询条件 房屋名称 户型 是否朝阳 房屋类型 是否新房 是否出租 是否出售 产权 联系方式
-// name: '',
-// style: '',
-// propertyRight: '',
-// propertyOwer: '',
-// type: '',
-// isSun: '',
-// isNew: '',
-// contactInformation: '',
-// isLease: '',
-// isSale: ''
+// id, name, style, isSun, type, isNew, propertyRight
 export const FORM_DATA = [
   {
     prop: 'name',
@@ -27,12 +17,6 @@ export const FORM_DATA = [
     type: 'text',
     class: { 'rc-input-w-150': true },
     attr: { placeholder: '产权', clearable: true }
-  },
-  {
-    prop: 'propertyOwer',
-    type: 'text',
-    class: { 'rc-input-w-150': true },
-    attr: { placeholder: '产权人', clearable: true }
   },
   {
     prop: 'type',
@@ -64,36 +48,6 @@ export const FORM_DATA = [
       }
     }
   },
-  {
-    prop: 'isLease',
-    type: 'select',
-    class: { 'rc-input-w-170': true },
-    attr: { placeholder: '是否出租', clearable: true, filterable: true },
-    async asyncData () {
-      return {
-        '是': '是',
-        '否': '否',
-      }
-    }
-  },
-  {
-    prop: 'isSale',
-    type: 'select',
-    class: { 'rc-input-w-170': true },
-    attr: { placeholder: '是否出售', clearable: true, filterable: true },
-    async asyncData () {
-      return {
-        '是': '是',
-        '否': '否',
-      }
-    }
-  },
-  {
-    prop: 'contactInformation',
-    type: 'text',
-    class: { 'rc-input-w-150': true },
-    attr: { placeholder: '联系方式', clearable: true }
-  },
 ]
 
 // name: '',
@@ -110,7 +64,7 @@ export const COLUMNS = function () {
   const _this = this
   return [
     {
-      prop: 'id',
+      prop: 'houseId',
       label: '房屋编号',
       'min-width': 120,
       align: 'center',
@@ -138,13 +92,6 @@ export const COLUMNS = function () {
       'show-overflow-tooltip': true,
     },
     {
-      prop: 'propertyOwer',
-      label: '产权人',
-      'min-width': 100,
-      align: 'center',
-      'show-overflow-tooltip': true,
-    },
-    {
       prop: 'type',
       label: '房屋类型',
       'min-width': 100,
@@ -166,15 +113,22 @@ export const COLUMNS = function () {
       'show-overflow-tooltip': true,
     },
     {
-      prop: 'isLease',
-      label: '是否出租',
+      prop: 'money',
+      label: '租金',
       'min-width': 100,
       align: 'center',
       'show-overflow-tooltip': true,
     },
     {
-      prop: 'isSale',
-      label: '是否出售',
+      prop: 'startTime',
+      label: '租赁开始时间',
+      'min-width': 100,
+      align: 'center',
+      'show-overflow-tooltip': true,
+    },
+    {
+      prop: 'endTime',
+      label: '租赁结束时间',
       'min-width': 100,
       align: 'center',
       'show-overflow-tooltip': true,
@@ -182,6 +136,13 @@ export const COLUMNS = function () {
     {
       prop: 'contactInformation',
       label: '联系方式',
+      'min-width': 100,
+      align: 'center',
+      'show-overflow-tooltip': true,
+    },
+    {
+      prop: 'desc',
+      label: '备注',
       'min-width': 100,
       align: 'center',
       'show-overflow-tooltip': true,
