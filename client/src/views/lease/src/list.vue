@@ -27,7 +27,7 @@
 import { FORM_DATA, COLUMNS } from './constant'
 import TableMixin from '@/mixins/table.mixin'
 import service from '@/services'
-const { findAllLeaseHouse, deleteHouseInfo } = service
+const { findAllLeaseHouse, setIsLease } = service
 export default {
   mixins: [TableMixin],
   data () {
@@ -60,16 +60,17 @@ export default {
       this.$router.push(`/house/detail/add/0`)
     },
     modifyInfo (res) {
-      this.$router.push(`/house/detail/edit/${res.id}`)
+      this.$router.push(`/lease/detail/edit/${res.id}`)
     },
-    async deleteInfo (res) {
+    async stopLease (res) {
       const params = {
-        id: res.id
+        id: res.houseId,
+        isLease: '否'
       }
-      await deleteHouseInfo(params)
+      await setIsLease(params)
       this.$notify.success({
         title: '提示',
-        message: '删除成功'
+        message: '修改成功成功'
       })
       this.onSearch('table')
     }

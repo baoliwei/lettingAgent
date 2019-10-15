@@ -173,14 +173,14 @@ export default {
 
 <style lang="scss">
 @include b(form) {
-  width: 100%;
+width: 100%;
 
-  @include e(item-inline) {
-    display: inline-block;
-  }
+@include e(item-inline) {
+  display: inline-block;
+}
 
-  @include e(item-block) {
-    display: block !important;
-  }
+@include e(item-block) {
+  display: block !important;
+}
 }
 </style>

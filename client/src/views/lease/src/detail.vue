@@ -14,34 +14,25 @@
         </div>
       </template> -->
     </rc-form>
+
   </el-card>
 </template>
 <script>
 import { DETLAIL_FORM_DATA } from './constant'
 import TableMixin from '@/mixins/table.mixin'
 import service from '@/services'
-const { pubilshHouse, findAllHouse, modifyHouseInfo } = service
+const { findAllLeaseHouse, modifyLeaseHouseInfo } = service
 export default {
   mixins: [TableMixin],
   data () {
     return {
       formData: DETLAIL_FORM_DATA,
-      // UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?
       form: {
         id: this.$route.params.id,
-        name: '',
-        addr: '',
-        style: '',
-        area: '',
-        propertyRight: '',
-        propertyOwer: '',
-        type: '',
-        isSun: '',
-        contactInformation: '',
-        isNew: '',
-        isLease: '',
-        isSale: '',
-        score: ''
+        startTime: '',
+        endTime: '',
+        money: '',
+        remark: ''
       }
     }
   },
@@ -59,30 +50,20 @@ export default {
       const params = {
         id: this.form.id
       }
-      const result = await findAllHouse(params)
-      this.form = result.result[0]
+      const result = await findAllLeaseHouse(params)
+      this.form = Object.assign(this.form, result.result[0])
     },
     updateHouse() {
-      this.$route.params.type === 'add' && this.pubilshHouse()
       this.$route.params.type === 'edit' && this.modifyInfo()
-    },
-    async pubilshHouse () {
-      const params = this.form
-      await pubilshHouse(params)
-      this.$notify.success({
-        title: '提示',
-        message: '发布成功'
-      })
-      this.$router.push(`/house/list`)
     },
     async modifyInfo () {
       const params = this.form
-      await modifyHouseInfo(params)
+      await modifyLeaseHouseInfo(params)
       this.$notify.success({
         title: '提示',
         message: '修改成功'
       })
-      this.$router.push(`/house/list`)
+      this.$router.push(`/lease/list`)
     }
   }
 }

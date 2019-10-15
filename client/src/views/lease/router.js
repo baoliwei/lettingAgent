@@ -5,7 +5,7 @@ export default {
   tabs: [
     {
       path: '/lease/list',
-      name: 'house',
+      name: 'leaseHouse',
       component: List,
       meta: {
         title: '出租管理',
@@ -15,11 +15,11 @@ export default {
       }
     },
     {
-      path: '/house/detail/:type/:id',
-      name: 'houseDetail',
+      path: '/lease/detail/:type/:id',
+      name: 'leaseHouseDetail',
       component: Detail,
       meta: {
-        title: '房源信息',
+        title: '出租管理信息',
         isMenu: true,
         rule: '',
         isAddTab: true

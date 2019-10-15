@@ -2982,9 +2982,10 @@ element-theme-chalk@^2.0.7:
   version "2.4.10"
   resolved "http://registry.npm.taobao.org/element-theme-chalk/download/element-theme-chalk-2.4.10.tgz#2df9aa8733049ebf4feb5d4e2f9d631cd8b9599a"
 
-element-ui@^2.0.7:
-  version "2.4.5"
-  resolved "http://registry.npm.taobao.org/element-ui/download/element-ui-2.4.5.tgz#ca1d0fc3f6ec0b5ca2a717655e6778a8e24ca673"
+element-ui@2.4.11:
+  version "2.4.11"
+  resolved "http://r.cnpmjs.org/element-ui/download/element-ui-2.4.11.tgz#db6a2d37001b8fe5fff9f176fb58bb3908cfa9c9"
+  integrity sha1-22otNwAbj+X/+fF2+1i7OQjPqck=
   dependencies:
     async-validator "~1.8.1"
     babel-helper-vue-jsx-merge-props "^2.0.0"

@@ -1,4 +1,4 @@
-import Select from './src/select.vue'
+import Select from './src/main.vue'
 Select.install = function (Vue) {
   Vue.component(Select.name, Select)
 }

@@ -23,4 +23,10 @@ export default [
     method: 'post',
     description: '删除房源信息',
   },
+  {
+    name: 'setIsLease',
+    url: '/house/setIsLease',
+    method: 'post',
+    description: '设置是否出租',
+  },
 ]

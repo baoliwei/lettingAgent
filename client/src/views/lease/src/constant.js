@@ -141,7 +141,7 @@ export const COLUMNS = function () {
       'show-overflow-tooltip': true,
     },
     {
-      prop: 'desc',
+      prop: 'remark',
       label: '备注',
       'min-width': 100,
       align: 'center',
@@ -156,7 +156,7 @@ export const COLUMNS = function () {
         return (
           <div>
             <el-button type="text" class="primary" onClick={_this.modifyInfo.bind(_this, scope.row)}>修改资料</el-button>
-            <el-button type="text" class="primary" onClick={_this.deleteInfo.bind(_this, scope.row)}>删除资料</el-button>
+            <el-button type="text" class="primary" onClick={_this.stopLease.bind(_this, scope.row)}>停止出租</el-button>
           </div>
         )
       }
@@ -166,99 +166,39 @@ export const COLUMNS = function () {
 // name, addr, style, area, propertyRight, propertyOwer, type, isSun, contactInformation
 export const DETLAIL_FORM_DATA = [
   {
-    prop: 'name',
+    prop: 'money',
     type: 'text',
     class: { 'rc-input-w-150': true },
-    attr: { placeholder: '房屋名称', clearable: true }
+    attr: { placeholder: '价格', clearable: true }
   },
   {
-    prop: 'addr',
-    type: 'text',
+    prop: 'startTime',
+    type: 'datePicker',
     class: { 'rc-input-w-150': true },
-    attr: { placeholder: '房屋地址', clearable: true }
-  },
-  {
-    prop: 'style',
-    type: 'text',
-    class: { 'rc-input-w-150': true },
-    attr: { placeholder: '户型', clearable: true }
-  },
-  {
-    prop: 'isSun',
-    type: 'select',
-    class: { 'rc-input-w-170': true },
-    attr: { placeholder: '是否朝阳', clearable: true, filterable: true },
-    async asyncData () {
-      return {
-        '是': '是',
-        '否': '否'
-      }
+    attr: {
+      type: 'datetime',
+      format: 'yyyy-MM-dd HH:mm:ss',
+      'value-format': 'yyyy-MM-dd HH:mm:ss',
+      placeholder: '租赁开始时间',
+      clearable: true
     }
   },
   {
-    prop: 'type',
-    type: 'text',
+    prop: 'endTime',
+    type: 'datePicker',
     class: { 'rc-input-w-150': true },
-    attr: { placeholder: '房屋类型', clearable: true }
-  },
-  {
-    prop: 'isNew',
-    type: 'select',
-    class: { 'rc-input-w-170': true },
-    attr: { placeholder: '是否新房', clearable: true, filterable: true },
-    async asyncData () {
-      return {
-        '是': '是',
-        '否': '否'
-      }
+    attr: {
+      type: 'datetime',
+      format: 'yyyy-MM-dd HH:mm:ss',
+      'value-format': 'yyyy-MM-dd HH:mm:ss',
+      placeholder: '租赁结束时间',
+      clearable: true
     }
   },
   {
-    prop: 'isLease',
-    type: 'select',
-    class: { 'rc-input-w-170': true },
-    attr: { placeholder: '是否出租', clearable: true, filterable: true },
-    async asyncData () {
-      return {
-        '是': '是',
-        '否': '否'
-      }
-    }
-  },
-  {
-    prop: 'isSale',
-    type: 'select',
-    class: { 'rc-input-w-170': true },
-    attr: { placeholder: '是否出售', clearable: true, filterable: true },
-    async asyncData () {
-      return {
-        '是': '是',
-        '否': '否'
-      }
-    }
-  },
-  {
-    prop: 'score',
+    prop: 'remark',
     type: 'text',
     class: { 'rc-input-w-150': true },
-    attr: { placeholder: '房屋评分', clearable: true }
-  },
-  {
-    prop: 'propertyRight',
-    type: 'text',
-    class: { 'rc-input-w-150': true },
-    attr: { placeholder: '产权', clearable: true }
-  },
-  {
-    prop: 'propertyOwer',
-    type: 'text',
-    class: { 'rc-input-w-150': true },
-    attr: { placeholder: '产权人', clearable: true }
-  },
-  {
-    prop: 'contactInformation',
-    type: 'text',
-    class: { 'rc-input-w-150': true },
-    attr: { placeholder: '联系方式', clearable: true }
-  },
+    attr: { placeholder: '备注', clearable: true }
+  }
 ]

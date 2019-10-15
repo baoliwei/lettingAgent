@@ -18,12 +18,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://gitlab.renrenche.com/aftersale/aftersale-integration-fe"
+    "url": ""
   },
-  "author": "baoliwei <baoliwei@renrenche.com>",
-  "contributors": [
-    "谢仁洪 <xierenhong@renrenche.com>"
-  ],
+  "author": "baoliwei <hdbaoliwei@163.com>",
+  "contributors": [""],
   "devDependencies": {
     "@anejs/anne-cli": "^2.2.0-beta.3",
     "@anejs/anne-migration-vue": "^2.2.0-beta.3",
@@ -33,7 +31,7 @@
     "@rrc/utils": "^0.0.4",
     "axios": "^0.17.1",
     "cross-env": "^5.2.0",
-    "element-ui": "^2.0.7",
+    "element-ui": "2.4.11",
     "express": "^4.17.1",
     "js-cookie": "^2.2.0",
     "moment": "^2.20.1",
