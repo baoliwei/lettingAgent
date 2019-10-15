@@ -30,11 +30,7 @@ function publishLeaseHouse(res, id, cb) { // 添加出租房源
 // 修改信息
 router.post('/modifyInfo', function(req, res, next) {
   let params = req.body || {};
-  console.log(params.id)
-  // UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?
-  let sqlQuery = [params.name, params.addr, params.style, params.area,
-    params.propertyRight, params.propertyOwer, params.type, params.isSun, params.isNew,
-    params.contactInformation, params.isLease, params.isSale, params.id]
+  let sqlQuery = [params.money, new Date(params.startTime), new Date(params.endTime), params.remark, params.id]
   mysqlPoll.queryArgs(res, sql.update, sqlQuery, function(result) {
     json(res, result, '信息修改成功')
   })

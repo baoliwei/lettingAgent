@@ -51,6 +51,23 @@ router.post('/modifyInfo', function(req, res, next) {
   })
 
 });
+// 修改信息
+router.post('/setIsLease', function(req, res, next) {
+  let params = req.body || {};
+  console.log(params.id)
+  // UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?
+  console.log('params.isLease', params.isLease)
+  let sqlQuery = [params.isLease, params.houseId]
+  mysqlPoll.queryArgs(res, sql.setIsLease, sqlQuery, function(result) {
+    if (params.isLease === '是') {
+      lease.publishLeaseHouse(res, params.id)
+    } else {
+      lease.deleteLeaseHouseInfo(res, params.id)
+    }
+    json(res, result, '信息修改成功')
+  })
+
+});
 
 // 查找权限内的所有用户
 router.get('/findAll', auth.userRequired, function(req, res, next) {

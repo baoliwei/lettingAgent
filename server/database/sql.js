@@ -37,6 +37,8 @@ var house = {
             `
         return sql
     },
+    // 设置是否出租
+    setIsLease:`UPDATE house SET isLease=? where id=?`,
     // 删除房源
     delete: 'DELETE FROM house WHERE id=?',
     // 查找房源
@@ -73,7 +75,7 @@ var lease = {
     // 添加出租房源
     insert:`INSERT INTO lease(houseId) VALUES(?)`,
     // 修改出租房源
-    update:`UPDATE lease SET money=?, startTime=?, endTime=?, desc=? WHERE id=?`,
+    update:`UPDATE lease SET money=?, startTime=?, endTime=?, remark=? WHERE id=?`,
     // 申领出租房源
     receive:`UPDATE lease SET agentId=?`,
     // 删除出租房源
@@ -86,6 +88,7 @@ var lease = {
         // ( lease LEFT JOIN house ON lease.houseId = house.id )
         // 	LEFT JOIN user ON lease.agentId = user.id
         let sql = `SELECT
+                lease.id as id,
                 house.id as houseId,
                 house.name as name,
                 house.type,
@@ -97,12 +100,13 @@ var lease = {
                 lease.money,
                 lease.startTime,
                 lease.endTime,
-                lease.desc,
+                lease.remark,
                 user.contactInformation,
                 user.name as saleName
                 FROM ( lease LEFT JOIN house ON lease.houseId = house.id )
                 LEFT JOIN user ON lease.agentId = user.id
                ${ [].every.call(arguments, (item) => { return !!item }) ? 'where ' : '' }
+               ${ id ? 'lease.id=?  and ' : ''  }
                ${ name ? 'house.name=?  and ' : ''  }
                ${ style ? 'house.style=?  and ' : ''  }
                ${ propertyRight ? 'house.propertyRight=? and ' : ''  }
