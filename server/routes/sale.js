@@ -1,20 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var mysqlPoll = require('../database/mysql.poll');
-var sql = require('../database/sql').lease;
+var sql = require('../database/sql').sale;
 var json = require('../database/json');
 
 var auth = require('../lib/auth');
 var util = require('../lib/util');
 
 // 添加出租房源
-router.post('/publishLeaseHouse', function(req, res, next) {
+router.post('/publishSaleHouse', function(req, res, next) {
   let params = req.body || {};
-  publishLeaseHouse(res, params.houseId)
+  publishSaleHouse(res, params.houseId)
 
 });
 
-function publishLeaseHouse(res, id, cb) { // 添加出租房源
+function publishSaleHouse(res, id, cb) { // 添加出租房源
   mysqlPoll.queryArgs(res, sql.selectByHouseId, 
     [id], function(result) {
       if (result && result.length === 0) { // 如果不存在数据
@@ -40,7 +40,8 @@ router.post('/receive', function(req, res, next) {
 // 修改信息
 router.post('/modifyInfo', function(req, res, next) {
   let params = req.body || {};
-  let sqlQuery = [params.money, new Date(params.startTime), new Date(params.endTime), params.remark, params.id]
+  let sqlQuery = [params.money, params.remark, params.id]
+  console.log('xxxxxxxxxxxxxxxxx', sql.update)
   mysqlPoll.queryArgs(res, sql.update, sqlQuery, function(result) {
     json(res, result, '信息修改成功')
   })
@@ -69,10 +70,10 @@ router.get('/findAll', auth.userRequired, function(req, res, next) {
 // 删除信息
 router.post('/deleteHouseInfo', auth.userRequired, function(req, res, next) {
     let params = req.body || {};
-    deleteLeaseHouseInfo(res, params.id)
+    deleteSaleHouseInfo(res, params.id)
 });
 
-function deleteLeaseHouseInfo(res, id, cb) {
+function deleteSaleHouseInfo(res, id, cb) {
   let sqlQuery = [id, id]
   console.log('______________', sql.delete)
   mysqlPoll.queryArgs(res, sql.delete, sqlQuery, function() {
@@ -82,6 +83,6 @@ function deleteLeaseHouseInfo(res, id, cb) {
 
 module.exports = {
   router,
-  deleteLeaseHouseInfo,
-  publishLeaseHouse
+  deleteSaleHouseInfo,
+  publishSaleHouse
 };

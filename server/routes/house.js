@@ -7,6 +7,7 @@ var json = require('../database/json');
 var auth = require('../lib/auth');
 var util = require('../lib/util');
 var lease = require('./lease');
+var sale = require('./sale');
 // module.exports = {
 //   router,
 //   deleteLeaseHouseInfo,
@@ -28,6 +29,9 @@ router.post('/publishHouse', function(req, res, next) {
         if (params.isLease === '是') {
           lease.publishLeaseHouse(res, result.insertId)
         }
+        if (params.isSale === '是') {
+          sale.publishSaleHouse(res, result.insertId)
+        }
       console.log('ssssssssssssssssss', result)
       json(res, result, '发布成功')
   })
@@ -47,11 +51,18 @@ router.post('/modifyInfo', function(req, res, next) {
     } else {
       lease.deleteLeaseHouseInfo(res, params.id)
     }
+
+    if (params.isSale === '是') {
+      lease.publishSaleHouse(res, params.id)
+    } else {
+      lease.deleteSaleHouseInfo(res, params.id)
+    }
+
     json(res, result, '信息修改成功')
   })
 
 });
-// 修改信息
+// 设置是否出租
 router.post('/setIsLease', function(req, res, next) {
   let params = req.body || {};
   console.log(params.id)
@@ -64,7 +75,23 @@ router.post('/setIsLease', function(req, res, next) {
     } else {
       lease.deleteLeaseHouseInfo(res, params.id)
     }
-    json(res, result, '信息修改成功')
+    json(res, result, '不再出租')
+  })
+
+});
+
+// 设置是否出售
+router.post('/setIsSale', function(req, res, next) {
+  let params = req.body || {};
+  console.log(params.id)
+  let sqlQuery = [params.isSale, params.houseId]
+  mysqlPoll.queryArgs(res, sql.setIsSale, sqlQuery, function(result) {
+    if (params.isSale === '是') {
+      sale.publishSaleHouse(res, params.id)
+    } else {
+      sale.deleteSaleHouseInfo(res, params.id)
+    }
+    json(res, result, '不再出售')
   })
 
 });
@@ -102,6 +129,8 @@ router.post('/deleteHouseInfo', auth.userRequired, function(req, res, next) {
   // UPDATE user SET name=?, sex=?, age=?, IDCard=?, type=? WHERE id=?
   let sqlQuery = [params.id]
   mysqlPoll.queryArgs(res, sql.delete, sqlQuery, function(result) {
+    lease.deleteLeaseHouseInfo(res, params.id)
+    sale.deleteSaleHouseInfo(res, params.id)
     json(res, result, '信息删除成功')
   })
 });

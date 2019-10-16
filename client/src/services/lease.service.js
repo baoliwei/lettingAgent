@@ -7,8 +7,14 @@ export default [
   },
   {
     name: 'modifyLeaseHouseInfo',
-    url: '/lease/setIsLease',
+    url: '/lease/modifyInfo',
     method: 'post',
     description: '修改出租管理信息',
+  },
+  {
+    name: 'receiveLease',
+    url: '/lease/receive',
+    method: 'post',
+    description: '申领出租管理信息',
   }
 ]

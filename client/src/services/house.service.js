@@ -29,4 +29,10 @@ export default [
     method: 'post',
     description: '设置是否出租',
   },
+  {
+    name: 'setIsSale',
+    url: '/house/setIsSale',
+    method: 'post',
+    description: '设置是否出售',
+  },
 ]

@@ -4,6 +4,7 @@ var json = require('../database/json');
 const auth = {
     // 生成cookie
     gen_session: (user, res) => {
+        console.log('token再次生成了')
         let auth_user = `${user.id}`;
         res.cookie('token', auth_user, {
             path: '/',
@@ -14,6 +15,7 @@ const auth = {
     },
     authUser: (req, res, next) => {
         //中间件, 所有的请求都要经过它, 我们在这来判断用户的登录情况
+        console.log('req.session.user:', req.session.user)
         if(req.session.user) {
             next();//用户已经登录情况下, 直接下一步
         }
@@ -21,6 +23,7 @@ const auth = {
             // 需要通过cookie去生成session
             // 1.获取cookie
             let auth_token = req.signedCookies['token'];//cookie-parser直接帮我解密了
+            console.log('auth_token:不存在Session', auth_token)
             if (!auth_token) {
                 next()
             }
@@ -31,6 +34,7 @@ const auth = {
                 //数据库去找这个用户ID
                 mysqlPoll.queryArgs(res, sql.queryById, [user_id], function(result) {
                     if(result && result.length !== 0) {
+                        console.log('生成了session user')
                         req.session.user = result[0];
                         next();
                     } else {

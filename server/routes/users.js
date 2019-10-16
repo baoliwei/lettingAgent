@@ -30,12 +30,18 @@ router.post('/login', function(req, res, next) {
 
 // 获取当前用户
 router.get('/currentUser', auth.userRequired, function(req, res, next) {
-    json(res, req.session.user, '')
+  console.log('获取当前用户信息接口执行了。')
+    json(res, req.session.user, '获取成功')
 });
 
 // 退出登录
-router.post('/logout', function(req, res, next) {
-  json(res, result, '退出登录成功')
+router.get('/logout', function(req, res, next) {
+  console.log('退出接口执行了。')
+  req.session.user = null;
+  res.cookie('token', '', {
+    path: '/'
+  });
+  res.redirect('/');
 });
 
 // 注册

@@ -39,6 +39,8 @@ var house = {
     },
     // 设置是否出租
     setIsLease:`UPDATE house SET isLease=? where id=?`,
+    // 设置是否出售
+    setIsSale:`UPDATE house SET isSale=? where id=?`,
     // 删除房源
     delete: 'DELETE FROM house WHERE id=?',
     // 查找房源
@@ -77,7 +79,7 @@ var lease = {
     // 修改出租房源
     update:`UPDATE lease SET money=?, startTime=?, endTime=?, remark=? WHERE id=?`,
     // 申领出租房源
-    receive:`UPDATE lease SET agentId=?`,
+    receive:`UPDATE lease SET agentId=? WHERE id=? and agentId=null`,
     // 删除出租房源
     delete: 'DELETE FROM lease WHERE houseId=?',
     // 查找出租房源
@@ -121,6 +123,55 @@ var lease = {
     }
 };
 
+// 出租管理
+var sale = {
+    // 添加出租房源
+    insert:`INSERT INTO sale(houseId) VALUES(?)`,
+    // 修改出租房源
+    update:`UPDATE sale SET money=?, remark=? WHERE id=?`,
+    // 申领出租房源
+    receive:`UPDATE sale SET agentId=? WHERE id=? and agentId=null`,
+    // 删除出租房源
+    delete: 'DELETE FROM sale WHERE houseId=?',
+    // 查找出租房源
+    selectByHouseId: 'SELECT * FROM sale where houseId=?',
+    //查找条件：id 房屋名称 户型 是否朝阳 房屋类型 是否新房  产权
+    queryByArgs: (id, name, style, isSun, type, isNew, propertyRight) => {
+        // SELECT * FROM 
+        // ( lease LEFT JOIN house ON lease.houseId = house.id )
+        // 	LEFT JOIN user ON lease.agentId = user.id
+        let sql = `SELECT
+        sale.id as id,
+                house.id as houseId,
+                house.name as name,
+                house.type,
+                house.propertyRight,
+                house.style,
+                house.isNew,
+                house.isSun,
+                house.type,
+                sale.money,
+                sale.remark,
+                user.contactInformation,
+                user.name as saleName
+                FROM ( sale LEFT JOIN house ON sale.houseId = house.id )
+                LEFT JOIN user ON sale.agentId = user.id
+               ${ [].every.call(arguments, (item) => { return !!item }) ? 'where ' : '' }
+               ${ id ? 'sale.id=?  and ' : ''  }
+               ${ name ? 'house.name=?  and ' : ''  }
+               ${ style ? 'house.style=?  and ' : ''  }
+               ${ propertyRight ? 'house.propertyRight=? and ' : ''  }
+               ${ type ? 'house.type=? and ' : ''  }
+               ${ isSun ? 'house.isSun=? and ' : ''  }
+               ${ isNew ? 'house.isNew=? and ' : ''  }
+               1=1`;
+               console.log('-----------------------------------------')
+               console.log('sql', sql)
+               console.log('arguments', id)
+        return sql;
+    }
+};
+
 module.exports = {
-    user, house, lease
+    user, house, lease, sale
 };

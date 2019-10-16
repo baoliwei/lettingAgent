@@ -27,7 +27,7 @@
 import { FORM_DATA, COLUMNS } from './constant'
 import TableMixin from '@/mixins/table.mixin'
 import service from '@/services'
-const { findAllLeaseHouse, setIsLease, receiveLease } = service
+const { findAllSaleHouse, setIsSale, receiveSale } = service
 export default {
   mixins: [TableMixin],
   data () {
@@ -51,7 +51,7 @@ export default {
   methods: {
     async load (table) {
       const params = this.form
-      const result = await findAllLeaseHouse(params)
+      const result = await findAllSaleHouse(params)
       console.log(result)
       // table.total = total
       table.list = result.result
@@ -60,7 +60,7 @@ export default {
       const params = {
         id: res.id,
       }
-      await receiveLease(params)
+      await receiveSale(params)
       this.$notify.success({
         title: '提示',
         message: '申领成功'
@@ -71,14 +71,14 @@ export default {
       this.$router.push(`/house/detail/add/0`)
     },
     modifyInfo (res) {
-      this.$router.push(`/lease/detail/edit/${res.id}`)
+      this.$router.push(`/sale/detail/edit/${res.id}`)
     },
-    async stopLease (res) {
+    async stopSale (res) {
       const params = {
         id: res.houseId,
-        isLease: '否'
+        isSale: '否'
       }
-      await setIsLease(params)
+      await setIsSale(params)
       this.$notify.success({
         title: '提示',
         message: '修改成功成功'

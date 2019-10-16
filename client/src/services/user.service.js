@@ -12,6 +12,12 @@ export default [
     description: '登录',
   },
   {
+    name: 'logout',
+    url: '/users/logout',
+    method: 'get',
+    description: '退出登录',
+  },
+  {
     name: 'getList',
     url: '/users/findAll',
     method: 'get',

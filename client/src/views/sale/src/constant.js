@@ -114,25 +114,25 @@ export const COLUMNS = function () {
     },
     {
       prop: 'money',
-      label: '租金',
+      label: '价格',
       'min-width': 100,
       align: 'center',
       'show-overflow-tooltip': true,
     },
-    {
-      prop: 'startTime',
-      label: '租赁开始时间',
-      'min-width': 100,
-      align: 'center',
-      'show-overflow-tooltip': true,
-    },
-    {
-      prop: 'endTime',
-      label: '租赁结束时间',
-      'min-width': 100,
-      align: 'center',
-      'show-overflow-tooltip': true,
-    },
+    // {
+    //   prop: 'startTime',
+    //   label: '租赁开始时间',
+    //   'min-width': 100,
+    //   align: 'center',
+    //   'show-overflow-tooltip': true,
+    // },
+    // {
+    //   prop: 'endTime',
+    //   label: '租赁结束时间',
+    //   'min-width': 100,
+    //   align: 'center',
+    //   'show-overflow-tooltip': true,
+    // },
     {
       prop: 'contactInformation',
       label: '联系方式',
@@ -157,7 +157,7 @@ export const COLUMNS = function () {
           <div>
             <el-button type="text" class="primary" onClick={_this.receive.bind(_this, scope.row)}>申领</el-button>
             <el-button type="text" class="primary" onClick={_this.modifyInfo.bind(_this, scope.row)}>修改资料</el-button>
-            <el-button type="text" class="primary" onClick={_this.stopLease.bind(_this, scope.row)}>停止出租</el-button>
+            <el-button type="text" class="primary" onClick={_this.stopSale.bind(_this, scope.row)}>停止出售</el-button>
           </div>
         )
       }
@@ -172,30 +172,30 @@ export const DETLAIL_FORM_DATA = [
     class: { 'rc-input-w-150': true },
     attr: { placeholder: '价格', clearable: true }
   },
-  {
-    prop: 'startTime',
-    type: 'datePicker',
-    class: { 'rc-input-w-150': true },
-    attr: {
-      type: 'datetime',
-      format: 'yyyy-MM-dd HH:mm:ss',
-      'value-format': 'yyyy-MM-dd HH:mm:ss',
-      placeholder: '租赁开始时间',
-      clearable: true
-    }
-  },
-  {
-    prop: 'endTime',
-    type: 'datePicker',
-    class: { 'rc-input-w-150': true },
-    attr: {
-      type: 'datetime',
-      format: 'yyyy-MM-dd HH:mm:ss',
-      'value-format': 'yyyy-MM-dd HH:mm:ss',
-      placeholder: '租赁结束时间',
-      clearable: true
-    }
-  },
+  // {
+  //   prop: 'startTime',
+  //   type: 'datePicker',
+  //   class: { 'rc-input-w-150': true },
+  //   attr: {
+  //     type: 'datetime',
+  //     format: 'yyyy-MM-dd HH:mm:ss',
+  //     'value-format': 'yyyy-MM-dd HH:mm:ss',
+  //     placeholder: '租赁开始时间',
+  //     clearable: true
+  //   }
+  // },
+  // {
+  //   prop: 'endTime',
+  //   type: 'datePicker',
+  //   class: { 'rc-input-w-150': true },
+  //   attr: {
+  //     type: 'datetime',
+  //     format: 'yyyy-MM-dd HH:mm:ss',
+  //     'value-format': 'yyyy-MM-dd HH:mm:ss',
+  //     placeholder: '租赁结束时间',
+  //     clearable: true
+  //   }
+  // },
   {
     prop: 'remark',
     type: 'text',
