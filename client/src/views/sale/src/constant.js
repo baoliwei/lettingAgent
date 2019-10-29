@@ -156,6 +156,7 @@ export const COLUMNS = function () {
         return (
           <div>
             <el-button type="text" class="primary" onClick={_this.receive.bind(_this, scope.row)}>申领</el-button>
+            <el-button type="text" class="primary" onClick={_this.sale.bind(_this, scope.row)}>购买房屋</el-button>
             <el-button type="text" class="primary" onClick={_this.modifyInfo.bind(_this, scope.row)}>修改资料</el-button>
             <el-button type="text" class="primary" onClick={_this.stopSale.bind(_this, scope.row)}>停止出售</el-button>
           </div>

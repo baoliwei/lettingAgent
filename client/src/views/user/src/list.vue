@@ -1,6 +1,7 @@
 <template>
   <el-card class="rc-partners-shop">
     <rc-form
+      v-if="this.$route.query.source !== 'person'"
       ref="form"
       v-model="form"
       :data="formData"
@@ -44,12 +45,15 @@ export default {
       }
     }
   },
+  mounted () {
+    this.load(this.$refs.table)
+  },
   activated () {
     this.onReload()
   },
   methods: {
     async load (table) {
-      const params = this.form
+      const params = this.$route.query.source !== 'person' ? this.form : { id: this.$store.state.user.userInfo.id }
       const result = await getList(params)
       console.log(result)
       // table.total = total

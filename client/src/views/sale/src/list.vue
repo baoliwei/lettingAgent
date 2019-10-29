@@ -56,6 +56,17 @@ export default {
       // table.total = total
       table.list = result.result
     },
+    sale (data) { // 租赁房源
+      this.$alert(`请联系${data.contactInformation}`, '购买房屋', {
+        confirmButtonText: '确定',
+        callback: () => {
+          // this.$message({
+          //   type: 'info',
+          //   message: `action: ${data}`
+          // })
+        }
+      })
+    },
     async receive (res) { // 申领
       const params = {
         id: res.id,
