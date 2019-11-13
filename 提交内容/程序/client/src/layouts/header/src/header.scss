@@ -1,0 +1,129 @@
+@import 'scss/variables';
+@import 'scss/mixins/mixin';
+@import 'scss/element.variables';
+
+$font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+@include b(header) {
+  position: absolute;
+  z-index: 304;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  transition: height 0.3s ease-in-out;
+
+  .logo {
+    line-height: $header-height;
+    // width: $side-bar-width;
+    width: 250px;
+    padding-left: 20px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-top: -5px;
+      height: 46px;
+      border: none;
+      margin-right: 5px;
+    }
+
+    h1 {
+      font-family: $font-family;
+      font-size: 18px;
+      color: $primary;
+
+      @include text-overflow-1;
+    }
+  }
+
+  .tool {
+    flex: 1;
+    display: flex;
+
+    .user {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 20px;
+    }
+  }
+
+  @include e(btns) {
+    width: 96px;
+    height: 100%;
+    display: flex;
+
+    .btn {
+      text-align: center;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      width: 50%;
+      height: 100%;
+      cursor: pointer;
+      padding: 0 12px;
+      box-sizing: border-box;
+
+      i {
+        font-size: 18px;
+      }
+
+      &:hover {
+        background: $--select-option-hover-background;
+      }
+    }
+  }
+
+  .telephone-tool-container {
+    margin-top: 15px;
+    cursor: pointer;
+
+    .telephone-tool-icon {
+      font-size: 35px;
+      color: #c12e2a;
+      width: 44px;
+      line-height: 15px;
+    }
+
+    .telephone-tool-text {
+      margin-left: -4px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+  }
+
+  .user-info {
+    padding: 18px 12px;
+    transition: all 0.3s;
+
+    .info-container {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      height: 24px;
+      font-family: $font-family;
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.65);
+
+      .username {
+        font-size: 14px;
+      }
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+      border-radius: 24px;
+      padding-right: 12px;
+    }
+
+    .rc-icon-account {
+      font-size: 22px;
+    }
+  }
+}

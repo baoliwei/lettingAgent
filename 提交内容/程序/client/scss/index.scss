@@ -1,0 +1,15 @@
+@import './variables';
+@import './mixins/mixin';
+@import './.core/rese';
+@import './ui/nprogress';
+@import './ui/icon';
+
+.el-form-item__label,
+.el-input,
+.el-radio__label,
+.el-tabs__item,
+.el-table th > .cell,
+.el-textarea__inner
+{
+  font-size: 12px;
+}
